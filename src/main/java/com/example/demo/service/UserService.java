@@ -1,4 +1,5 @@
 package com.example.demo.service;
+import com.example.demo.exception.UserNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,8 @@ public class UserService {
 		return repo.findAll();
 	}
 	public User getById(int id) {
-		return repo.findById(id).orElse(null);
+		return repo.findById(id)
+				.orElseThrow(()->new UserNotFoundException("User not found with id: "+id));
 	}
 	public void delete(int id) {
 		repo.deleteById(id);

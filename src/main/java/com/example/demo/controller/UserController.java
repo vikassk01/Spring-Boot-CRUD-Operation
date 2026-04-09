@@ -3,6 +3,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
+
+import jakarta.validation.Valid;
+
 import java.util.List;
 
 @RestController
@@ -13,7 +16,7 @@ public class UserController {
 	private UserService service;
 	
 	@PostMapping
-	public User addUser(@RequestBody User user) {
+	public User addUser(@Valid @RequestBody User user) {
 		return service.save(user);
 	}
 	
